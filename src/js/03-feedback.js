@@ -26,7 +26,7 @@ function onLoad() {
     }
   }
 
-  // ...Альтернативний метод...
+  // ...Альтернативний метод ...
   // if (data) {
   //   const email = data.email || '';
   //   refs.formElem.elements.email.value = email;
