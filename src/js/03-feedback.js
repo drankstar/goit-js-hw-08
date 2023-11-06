@@ -3,17 +3,20 @@ const refs = {
   formElem: document.querySelector('.feedback-form'),
 };
 
+refs.formElem.addEventListener('input', onFormInput);
 refs.formElem.addEventListener('submit', onSubmit);
 const data = {};
 
-const onFormInput = throttle(event => {
+const saveLocaleLS = throttle(
+  () => localStorage.setItem('feedback-form-state', JSON.stringify(data)),
+  500
+);
+function onFormInput(event) {
   const { name, value } = event.target;
 
   data[name] = value;
-
-  localStorage.setItem('feedback-form-state', JSON.stringify(data));
-}, 500);
-refs.formElem.addEventListener('input', onFormInput);
+  saveLocaleLS();
+}
 
 function onLoad() {
   const data = JSON.parse(localStorage.getItem('feedback-form-state'));
