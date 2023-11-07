@@ -5,7 +5,8 @@ const refs = {
 
 refs.formElem.addEventListener('input', onFormInput);
 refs.formElem.addEventListener('submit', onSubmit);
-const data = {};
+const dataStorage = localStorage.getItem('feedback-form-state');
+const data = dataStorage ? JSON.parse(dataStorage) : {};
 
 const saveLocaleLS = throttle(
   () => localStorage.setItem('feedback-form-state', JSON.stringify(data)),
@@ -19,7 +20,6 @@ function onFormInput(event) {
 }
 
 function onLoad() {
-  const data = JSON.parse(localStorage.getItem('feedback-form-state'));
   if (data) {
     for (let key in data) {
       refs.formElem.elements[key].value = data[key];
